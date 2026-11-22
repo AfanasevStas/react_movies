@@ -1,4 +1,12 @@
-﻿main
+﻿.main-loaded
 {
-	min-height:calc(100vh - 74px - 64px)
+	min-height: calc(100vh - 74px - 64px)
+}
+
+.main-loading
+{
+	min-height: calc(100vh - 70px - 64px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
