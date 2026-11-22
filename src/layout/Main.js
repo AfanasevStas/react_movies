@@ -16,9 +16,9 @@ class Main extends React.Component
 			.then(response => response.json())
 			.then(data => this.setState({movies:data.Search}))
 	}
-	searchMovie = (str) =>
+	searchMovie = (str, type='all') =>
 	{
-		fetch(`https://www.omdbapi.com/?s=${str}&apikey=47170fd4`)
+		fetch(`https://www.omdbapi.com/?s=${str}${type !== 'all' ? `&type=${type}` : ''}&apikey=47170fd4`)
 			.then(response => response.json())
 			.then(data => this.setState({ movies: data.Search }))
 
@@ -26,11 +26,14 @@ class Main extends React.Component
 	render()
 	{
 		return (
-			<main className={this.state.movies.length === 0 ? "main-loading" : "main-loaded"}>
+			<main className={this.state.movies == null ? <h1>Введите поисковый запрос</h1> : this.state.movies.length === 0 ? "main-loading" : "main-loaded"}>
 				<Search searchMovie={this.searchMovie } />
-				{this.state.movies.length === 0 ?
-				<Preloader /> :
-				<MovieList movies={this.state.movies} />}
+				{
+						this.state.movies == null ? <h1>Введите поисковый запрос</h1>:
+						this.state.movies.length === 0 ?
+						<Preloader /> :
+						<MovieList movies={this.state.movies} />
+				}
 			</main>
 		)
 	}
