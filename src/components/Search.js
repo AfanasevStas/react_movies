@@ -12,7 +12,7 @@ class Search extends React.Component
 	{
 		if (event.key === 'Enter')
 		{
-			this.props.searchMovie(this.state.search);
+			this.props.searchMovie(this.state.search, this.state.type);
 		}
 	}
 	handlerFilter = (event) =>
@@ -34,7 +34,7 @@ class Search extends React.Component
 						onChange={(e) => this.setState({ search: e.target.value })}
 						onKeyDown={this.handleKey }
 					/>
-					<button onClick={() => this.props.searchMovie(this.state.search)}>Поиск</button>
+					<button onClick={() => this.props.searchMovie(this.state.search, this.state.type)}>Поиск</button>
 				</div>
 				<div className='radio'>
 					<label><input type='radio' name='category' data-type='all'		checked={this.state.type === 'all'}			onChange={this.handlerFilter}/>  All</label>
