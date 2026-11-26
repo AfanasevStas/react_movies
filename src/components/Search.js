@@ -59,6 +59,13 @@ class Search extends React.Component
 		{
 			num.push(i);
 		}
+
+		let start = Math.max(1, this.state.page - 5);          //!!!
+		let end = Math.min(totalPages, start + 9);             //!!!
+		if (end - start < 9) {                                 //!!!
+			start = Math.max(1, end - 9);                      //!!!
+		}
+
 		console.log(this);
 		return (
 			<div>
@@ -81,11 +88,12 @@ class Search extends React.Component
 					<button className="btn" onClick={ this.prevPage }>Prev</button>
 					<div className="page-numbers">
 						{
-							num.slice(firstIndex, lastIndex).map
+							num.slice(start, end).map        //!!!
 							(
 								(element, index) =>
 								(
-									<button className="btn"
+									<button
+										className={`btn ${this.state.page === element ? 'btn-active' : ''}`}   //!!!
 										key={index}
 										onClick={ () => this.setPage(element) }
 
